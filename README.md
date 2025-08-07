@@ -4,3 +4,4 @@ This repository is a compilation of my implementation of mathematical concepts r
 projects, explore the doc and src directories.
 
 ## Projects:
+- Binomial Tree Model: src/binomial_model_pricing.py and src/modules/DerivativeBinomialTreeModel.py.
