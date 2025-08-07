@@ -1,0 +1,23 @@
+[tool.poetry]
+name = "FinanceRepo"
+version = "1.0.0"
+description = "A repository which contains code related to finance."
+authors = ["Eduardo Gibbons Diaz-Rato"]
+readme="README.md"
+license="MIT"
+package-mode = false
+
+[tool.poetry.dependencies]
+python = "^3.12"
+colorama = "^0.4.4"
+matplotlib = "^3.4.3"
+numpy = "^2.0.0"
+numpy-financial = "1.0.0"
+pandas = "^2.2.0"
+plotly = "^5.3.1"
+scipy = "^1.15.0"
+yfinance = "0.2.51"
+
+[build-system]
+requires = ["poetry>=2.0.0"]
+build-backend = "poetry.masonry.api"
