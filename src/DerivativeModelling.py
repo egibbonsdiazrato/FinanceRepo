@@ -3,43 +3,8 @@ import numpy as np
 import pandas as pd
 from typing import Callable
 
-
-
-
-class Market:
-    """
-    A class which defines the market in which the derivative is going to exist. The attributes of the market are
-    interest rates and timesteps. Timesteps are discretised ein integer timesteps.
-    """
-    def __init__(self, r: int | float, T: int) -> None:
-        """
-        Market constructor.
-
-        Args:
-            r: The constant interest rate earned every timestep.
-            T: Simulation has steps from 0 to T in steps of 1.
-        """
-        # Exceptions for inputs
-        if r < 0:
-            raise ValueError(f'r has to be greater than or equal to 0. The value input was {r=}.')
-        if T <= 0:
-            raise ValueError(f'T has to be greater than 0. The value input was {T=}.')
-
-        # Save inputs as attributes
-        self.r = r
-        self.T = T
-        self.deltat = 1  # Hardcoded property
-
-    def __str__(self) -> str:
-        """
-        To string method of a class.
-
-        Returns:
-            market_str: Descriptive string detailing the market.
-        """
-        market_str = f'The market environment has {self.r*100}% interest rates and exists up to {self.T=} timesteps.'
-        return market_str
-
+from src.Stock import Stock
+from src.Market import Market
 
 class BaseOptionBTM(ABC):
     """
@@ -458,12 +423,6 @@ class VanillaOptionBTM(BaseOptionBTM):
         else:
             payoff = np.where(~np.isnan(S_t), np.where(S_t > K, 0, K - S_t), np.nan)
         return payoff
-
-# TODO: implement
-# class AsianOptionMC:
-#     """
-#     This class is designed to price Asian options.
-#     """
 
 
 def IntRate_delta_rist(deriv: VanillaOptionBTM, stock: Stock, market: Market) -> None:

@@ -8,10 +8,10 @@ class Stock:  # TODO Improve step_up and step_down. Maybe change for u and d and
     movements are assumed to be symmetric and may be specified as either absolute or relative.
 
     Args:
-    S_0: Starting price of the underlying stock.
-    step_up: up movement size of the underlying.
-    step_down: down movement size of the underlying.
-    step_type: either abs or rel to specify what step is.
+        S_0: Starting price of the underlying stock.
+        step_up: up movement size of the underlying.
+        step_down: down movement size of the underlying.
+        step_type: either abs or rel to specify what step is.
     """
     S_0: int | float
     step_up: int | float
