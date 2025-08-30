@@ -1,6 +1,6 @@
 import numpy as np
 
-from modules.DerivativeModelling import Market, Stock, VanillaOptionBTM, IntRate_delta_rist
+from src.DerivativeModelling import Market, Stock, VanillaOptionBTM, IntRate_delta_rist
 
 
 def binary_option_payoff(S_T: np.ndarray) -> np.ndarray:

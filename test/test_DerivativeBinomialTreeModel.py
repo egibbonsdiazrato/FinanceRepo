@@ -1,7 +1,7 @@
 import numpy as np
 from unittest import TestCase
 
-from src.modules.DerivativeModelling import Market, Stock, VanillaOptionBTM
+from src.DerivativeModelling import Market, Stock, VanillaOptionBTM
 
 
 class TestOptionBTM(TestCase):
