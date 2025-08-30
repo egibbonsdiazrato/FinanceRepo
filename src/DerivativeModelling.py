@@ -4,56 +4,6 @@ import pandas as pd
 from typing import Callable
 
 
-class Stock:  # TODO Improve step_up and step_down. Maybe change for u and d and rework simulation function
-    """
-    A class which describes the stock that is related to the derivative that is going to be modelled. The attributes
-    are the price of the stock at time zero and the size of movement said stock can take after each timestep. These
-    movements are assumed to be symmetric and may be specified as either absolute or relative.
-    """
-    def __init__(self, S_0: int | float, step_up: int | float,  step_down: int | float, step_type: str) -> None:
-        """
-        Stock constructor.
-
-        Args:
-            S_0: Starting price of the underlying stock.
-            step_up: up movement size of the underlying.
-            step_down: down movement size of the underlying.
-            step_type: either abs or rel to specify what step is.
-        """
-        # Exceptions for inputs
-        if S_0 <= 0:
-            raise ValueError(f'S_0 has to be greater than 0. The value input was {S_0=}.')
-
-        # Save inputs attributes
-        self.S_0 = S_0
-        self.step_up = step_up
-        self.step_down = step_down
-
-        # Delta type flag
-        self.step_abs = False
-        self.step_rel = False
-        if step_type == 'abs':
-            self.step_abs = True
-        elif step_type == 'rel':
-            self.step_rel = True
-        else:
-            raise Exception(f'The step type provided, {step_type}, has to be either abs or rel')
-
-    def __str__(self) -> str:
-        """
-        To string method of a class.
-
-        Returns:
-            stock_str: Descriptive string detailing the market.
-        """
-        stock_str = f'The stock has initial value of {self.S_0} USD'
-        if self.step_abs:
-            stock_str += (f'and the absolute stock movement is +{self.step_up} or -{self.step_down} '
-                          f'USD for every timestep.')
-        else:
-            stock_str += (f'and the relative stock movement is {self.step_up} or {self.step_down} '
-                          f'for up and down movements for every timestep.')
-        return stock_str
 
 
 class Market:
