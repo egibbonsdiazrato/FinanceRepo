@@ -315,7 +315,7 @@ class VanillaOptionBTM(BaseOptionBTM):
     """
     A class to model Vanilla options. The only method required to implement is _calc_deriv_tree.
     """
-    def __init__(self, payoff_func: Callable[[np.ndarray], np.ndarray], payoff_func_desc: str | bool = None, is_AME: bool = False) -> None:
+    def __init__(self, payoff_func: Callable[[np.ndarray], np.ndarray], type: str, payoff_func_desc: str | bool = None) -> None:
         """
         Derivative constructor.
 
@@ -326,8 +326,13 @@ class VanillaOptionBTM(BaseOptionBTM):
         """
         super().__init__(payoff_func, payoff_func_desc)  # Call parent constructor
 
-        # Add a flat for whether EUR (if not assumed to be AME)
-        self.is_AME = is_AME
+        # Decide whether European or American option
+        self.type = type
+        if self.type not in ['EUR', 'AME']:
+            raise Exception('The type input is neither EUR (European) nor AME (American). Please use provide one '
+                            'of these two')
+
+        self.is_AME = True if type == 'AME' else False # Assumes only EUR or AME
 
     def _calc_deriv_tree(self, market: Market, verbose: bool) -> None:
         """
@@ -441,6 +446,7 @@ def IntRate_delta_rist(deriv: VanillaOptionBTM, stock: Stock, market: Market) ->
     # Recompute shifted PV for shifted market
     shifted_market = Market(r=market.r + 10**(-4), T=market.T)
     shifted_deriv = VanillaOptionBTM(payoff_func=deriv.payoff_func,
+                                     type=deriv.type,
                                      payoff_func_desc=deriv.payoff_func_desc)
 
     # Not the most efficient way as hedges and borrows are not required

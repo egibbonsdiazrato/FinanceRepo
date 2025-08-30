@@ -31,7 +31,9 @@ class Stock:  # TODO Improve step_up and step_down. Maybe change for u and d and
         # Delta type flag
         if self.step_type == 'abs':
             object.__setattr__(self, 'step_abs', True)
+            object.__setattr__(self, 'step_rel', False)
         elif self.step_type == 'rel':
+            object.__setattr__(self, 'step_abs', False)
             object.__setattr__(self, 'step_rel', True)
         else:
             raise Exception(f'The step type provided, {self.step_type}, has to be either abs or rel')

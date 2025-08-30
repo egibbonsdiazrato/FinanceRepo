@@ -1,6 +1,6 @@
 import numpy as np
 
-from src.DerivativeModelling import Market, Stock, VanillaOptionBTM, IntRate_delta_rist
+from src.Options import Market, Stock, VanillaOptionBTM, IntRate_delta_rist
 
 
 def binary_option_payoff(S_T: np.ndarray) -> np.ndarray:
@@ -32,12 +32,14 @@ if __name__ == '__main__':
 
     # No interest call option example
     option1 = VanillaOptionBTM(payoff_func=VanillaOptionBTM.call_option_strike100_payoff,
+                               type='EUR',
                                payoff_func_desc='This derivative is a EUR call option with strike 100.')
     option1.simulate_price_and_replication(stock=stock_A, market=market_1, verbose=True)
     option1.generate_filtration_table(['down', 'up', 'down'], market_1.T)
 
     # No interest binary option example
     option2 = VanillaOptionBTM(payoff_func=binary_option_payoff,
+                               type='EUR',
                                payoff_func_desc='This EUR derivative pays 100 if the stock price at maturity is '
                                                 'greater than \nor equal to 100.')
     option2.simulate_price_and_replication(stock=stock_B, market=market_1, verbose=True)
@@ -45,11 +47,12 @@ if __name__ == '__main__':
 
     # Comparison of PVs of EUR and AME options
     option3 = VanillaOptionBTM(payoff_func=VanillaOptionBTM.put_option_strike100_payoff,
+                               type='EUR',
                                payoff_func_desc='This derivative is a EUR put option with strike 100.')
     option3.simulate_price_and_replication(stock=stock_B, market=market_2, verbose=True)
     IntRate_delta_rist(option2, stock_B, market_2)  # Compute risk
 
     option4 = VanillaOptionBTM(payoff_func=VanillaOptionBTM.put_option_strike100_payoff,
-                               payoff_func_desc='This derivative is an AME put option with strike 100.',
-                               is_AME=True)
+                               type='AME',
+                               payoff_func_desc='This derivative is an AME put option with strike 100.')
     option4.simulate_price_and_replication(stock=stock_B, market=market_2, verbose=True)
