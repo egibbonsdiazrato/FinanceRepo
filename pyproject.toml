@@ -17,7 +17,7 @@ pandas = "^2.2.0"
 polars = "^1.32.0"
 plotly = "^5.3.1"
 scipy = "^1.15.0"
-yfinance = "0.2.51"
+yfinance = "0.2.65"
 
 [build-system]
 requires = ["poetry>=2.0.0"]
