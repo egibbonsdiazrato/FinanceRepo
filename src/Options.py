@@ -373,13 +373,8 @@ class VanillaOptionBTM(BaseOptionBTM):
                 deriv_down = deriv_tree[ind_down, t]
                 deriv_now = np.exp(-1*market.r*market.deltat)*(q*deriv_up + (1 - q)*deriv_down)
 
-                # EUR
-                if not self.is_AME:
-                    deriv_tree[ind_now, t - 1] = deriv_now
-                # AME
-                else:
-                    # Take into account early exercise
-                    deriv_tree[ind_now, t - 1] = max(deriv_now, self.payoff_func(self.stock_tree[ind_now, t - 1]))
+                deriv_tree[ind_now, t - 1] = (deriv_now if not self.is_AME  # EUR
+                                              else max(deriv_now, self.payoff_func(self.stock_tree[ind_now, t - 1]))) # AME
 
         # Save as attributes
         self.deriv_tree = deriv_tree
