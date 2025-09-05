@@ -69,6 +69,7 @@ repayment is made in full at the end of the mortgage. This is shown below, where
 ## Comparison
 
 Consider the difference, $M_D$ of the monthly payments, excluding the last payment, of an interest-only, $M_I$ and repayment mortgages, $M_R$.
+
 $$ M_D = M_R - M_I $$
 
 $$ M_D = \frac{(1+r)^n}{(1+r)^n - 1}rL - rL = (\frac{(1+r)^n}{(1+r)^n - 1} - 1)rL = \frac{rL}{(1+r)^n - 1} = C$$
